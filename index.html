@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Assignment Cover Generator</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="app">
+        
+        <header>
+    <img src="puc_logo.png" alt="Premier University Logo" class="university-logo">
+
+
+    <h1>Assignment Cover Generator</h1>
+    <p>Premier University</p>
+    <p>Department of Computer Science & Engineering</p>
+</header>
+
+        <main>
+
+            <!-- Input Section -->
+            <section class="form-section">
+
+                <h2>Enter Your Information</h2>
+
+                <input type="text" id="university" value="Premier University" readonly>
+
+                <input type="text" id="department" value="Department of Computer Science & Engineering" readonly>
+
+                <input type="text" id="studentName"
+                    placeholder="Student Name">
+
+                <input type="text" id="studentId"
+                    placeholder="Student ID">
+
+                <input type="text" id="courseName"
+                    placeholder="Course Name">
+
+                <input type="text" id="courseCode"
+                    placeholder="Course Code">
+
+                <input type="text" id="assignmentTitle"
+                    placeholder="Assignment Title">
+
+                <input type="text" id="teacherName"
+                    placeholder="Teacher Name">
+
+                <input type="date" id="submissionDate">
+
+                <div class="buttons">
+                    <button onclick="generateCover()" style="background-color: #007bff; color: white;">
+    Generate Cover
+</button>
+                    <button onclick="clearData()" class="clear">
+                        Clear
+                    </button>
+                </div>
+
+            </section>
+
+
+            <!-- Cover Preview -->
+            <section class="preview-section">
+
+                <div id="cover">
+                    <img src="puc_logo.png" alt="Premier University Logo" class="cover-logo">
+
+
+                    <h1 id="showUniversity">Premier University</h1>
+<p id="showDepartment">Department of Computer Science & Engineering</p>
+
+                    <div class="cover-title">
+                        <h2>ASSIGNMENT</h2>
+                        <h3 id="showAssignment">
+                            Assignment Title
+                        </h3>
+                    </div>
+
+                    <div class="details">
+
+                        <p>
+                            <strong>Student Name:</strong>
+                            <span id="showStudentName">---</span>
+                        </p>
+
+                        <p>
+                            <strong>Student ID:</strong>
+                            <span id="showStudentId">---</span>
+                        </p>
+
+                        <p>
+                            <strong>Course Name:</strong>
+                            <span id="showCourseName">---</span>
+                        </p>
+
+                        <p>
+                            <strong>Course Code:</strong>
+                            <span id="showCourseCode">---</span>
+                        </p>
+
+                        <p>
+                            <strong>Teacher Name:</strong>
+                            <span id="showTeacherName">---</span>
+                        </p>
+
+                        <p>
+                            <strong>Submission Date:</strong>
+                            <span id="showDate">---</span>
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <button onclick="window.print()" class="print-btn">
+                    🖨 Print / Save PDF
+                </button>
+
+            </section>
+
+        </main>
+
+    </div>
+
+    <script src="script.js"></script>
+
+</body>
+</html>

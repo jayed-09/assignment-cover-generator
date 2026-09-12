@@ -1,0 +1,362 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #eef1f5;
+    color: #222;
+}
+
+.app {
+    max-width: 1200px;
+    margin: auto;
+    padding: 30px;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+header h1 {
+    font-size: 32px;
+    margin-bottom: 8px;
+}
+
+header p {
+    color: #666;
+}
+
+main {
+    display: grid;
+    grid-template-columns: 350px 1fr;
+    gap: 30px;
+}
+
+/* Form */
+
+.form-section {
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+}
+
+.form-section h2 {
+    margin-bottom: 20px;
+}
+
+input {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 12px;
+    border: 1px solid #ccc;
+    border-radius: 7px;
+    font-size: 14px;
+}
+
+input:focus {
+    outline: none;
+    border-color: #333;
+}
+
+.buttons {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+button {
+    border: none;
+    padding: 12px 18px;
+    border-radius: 7px;
+    cursor: pointer;
+    background: #222;
+    color: white;
+    font-size: 14px;
+}
+
+button:hover {
+    opacity: 0.85;
+}
+
+.clear {
+    background: #d9534f;
+}
+
+/* Preview */
+
+.preview-section {
+    text-align: center;
+}
+
+#cover {
+    background: white;
+    min-height: 750px;
+    padding: 60px;
+    text-align: center;
+    border-radius: 5px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.12);
+}
+
+#showUniversity {
+    font-size: 28px;
+    margin-bottom: 10px;
+}
+
+#showDepartment {
+    color: #666;
+    font-size: 17px;
+}
+
+.cover-title {
+    margin: 100px 0 70px;
+}
+
+.cover-title h2 {
+    font-size: 34px;
+    letter-spacing: 2px;
+    margin-bottom: 20px;
+}
+
+.cover-title h3 {
+    font-size: 22px;
+}
+
+.details {
+    text-align: left;
+    max-width: 550px;
+    margin: auto;
+}
+
+.details p {
+    margin: 18px 0;
+    font-size: 16px;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 8px;
+}
+
+.details strong {
+    display: inline-block;
+    width: 170px;
+}
+
+.print-btn {
+    margin-top: 20px;
+    background: #333;
+}
+
+/* Mobile */
+
+@media (max-width: 800px) {
+
+    .app {
+        padding: 15px;
+    }
+
+    main {
+        grid-template-columns: 1fr;
+    }
+
+    #cover {
+        padding: 35px 20px;
+    }
+
+    .cover-title {
+        margin: 60px 0 50px;
+    }
+}
+
+/* Print */
+
+@media print {
+
+    body {
+        background: white;
+    }
+
+    header,
+    .form-section,
+    .print-btn {
+        display: none;
+    }
+
+    .app {
+        padding: 0;
+    }
+
+    main {
+        display: block;
+    }
+
+    #cover {
+        box-shadow: none;
+        border-radius: 0;
+        min-height: 100vh;
+    }
+    .university-logo {
+    width: 100px;
+    height: 100px;
+    object-fit: contain;
+    margin-bottom: 15px;
+}
+.cover-logo {
+    width: 100px;
+    height: 100px;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto 12px;
+}
+
+#showUniversity {
+    text-align: center;
+    margin: 5px 0;
+    font-size: 28px;
+}
+
+#showDepartment {
+    text-align: center;
+    margin: 5px 0 25px;
+    font-size: 17px;
+}
+@media print {
+    body {
+        background: white;
+    }
+
+    .form-section,
+    header,
+    .print-btn {
+        display: none;
+    }
+
+    .preview-section {
+        width: 100%;
+        margin: 0;
+        padding: 0;
+    }
+
+    #cover {
+        width: 100%;
+        min-height: 100vh;
+        box-shadow: none;
+        border: none;
+    }
+}
+.cover-title {
+    text-align: center;
+    margin: 30px 0;
+    padding: 20px 0;
+}
+
+.cover-title h2 {
+    font-size: 30px;
+    letter-spacing: 2px;
+    margin-bottom: 12px;
+}
+
+.cover-title h3 {
+    font-size: 22px;
+    margin: 0;
+    font-weight: 500;
+}
+.details {
+    width: 80%;
+    margin: 20px auto;
+}
+
+.details p {
+    display: flex;
+    margin: 12px 0;
+    font-size: 16px;
+}
+
+.details p strong {
+    width: 160px;
+}
+
+.details p span {
+    flex: 1;
+}
+#cover {
+    border: 2px solid #222;
+    padding: 40px;
+    box-sizing: border-box;
+    min-height: 1000px;
+}
+.form-section input {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    margin-bottom: 12px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    box-sizing: border-box;
+    font-size: 15px;
+}
+
+.form-section input:focus {
+    outline: none;
+    border: 1px solid #555;
+}
+button {
+    background-color: #007bff !important;
+    color: white !important;
+}
+
+button:hover {
+    background-color: #0056b3 !important;
+}
+@media (max-width: 768px) {
+    .container {
+        grid-template-columns: 1fr;
+    }
+
+    .form-section,
+    .preview-section {
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    #cover {
+        padding: 25px;
+        min-height: auto;
+    }
+
+    .cover-logo {
+        width: 80px;
+        height: 80px;
+    }
+
+    #showUniversity {
+        font-size: 23px;
+    }
+
+    #showDepartment {
+        font-size: 14px;
+    }
+
+    .cover-title h2 {
+        font-size: 25px;
+    }
+
+    .cover-title h3 {
+        font-size: 19px;
+    }
+
+    .details {
+        width: 100%;
+    }
+
+    .details p {
+        font-size: 14px;
+    }
+
+    .details p strong {
+        width: 130px;
+    }
+}
+}
