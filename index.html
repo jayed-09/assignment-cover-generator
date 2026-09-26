@@ -1,134 +1,704 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Assignment Cover Generator</title>
+    <meta name="description"
+        content="Premier University Assignment Cover Generator - Create professional assignment cover pages quickly.">
 
+    <title>Assignment Cover Generator | Premier University</title>
+
+    <link rel="icon" type="image/png" href="puc_logo.png">
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-    <div class="app">
-        
-        <header>
-    <img src="puc_logo.png" alt="Premier University Logo" class="university-logo">
+    <!-- ================= HEADER ================= -->
 
+    <header class="site-header">
 
-    <h1>Assignment Cover Generator</h1>
-    <p>Premier University</p>
-    <p>Department of Computer Science & Engineering</p>
-</header>
+        <div class="header-content">
 
-        <main>
+            <div class="brand">
 
-            <!-- Input Section -->
-            <section class="form-section">
+                <img src="puc_logo.png"
+                    alt="Premier University Logo"
+                    class="university-logo">
 
-                <h2>Enter Your Information</h2>
+                <div class="brand-text">
+                    <h1>Assignment Cover Generator</h1>
 
-                <input type="text" id="university" value="Premier University" readonly>
+                    <p>Premier University</p>
 
-                <input type="text" id="department" value="Department of Computer Science & Engineering" readonly>
-
-                <input type="text" id="studentName"
-                    placeholder="Student Name">
-
-                <input type="text" id="studentId"
-                    placeholder="Student ID">
-
-                <input type="text" id="courseName"
-                    placeholder="Course Name">
-
-                <input type="text" id="courseCode"
-                    placeholder="Course Code">
-
-                <input type="text" id="assignmentTitle"
-                    placeholder="Assignment Title">
-
-                <input type="text" id="teacherName"
-                    placeholder="Teacher Name">
-
-                <input type="date" id="submissionDate">
-
-                <div class="buttons">
-                    <button onclick="generateCover()" style="background-color: #007bff; color: white;">
-    Generate Cover
-</button>
-                    <button onclick="clearData()" class="clear">
-                        Clear
-                    </button>
+                    <span>
+                        Department of Computer Science & Engineering
+                    </span>
                 </div>
 
-            </section>
+            </div>
+
+            <div class="header-badge">
+                <span class="status-dot"></span>
+                Ready
+            </div>
+
+        </div>
+
+    </header>
 
 
-            <!-- Cover Preview -->
-            <section class="preview-section">
+    <!-- ================= MAIN APP ================= -->
 
-                <div id="cover">
-                    <img src="puc_logo.png" alt="Premier University Logo" class="cover-logo">
+    <main class="app">
+
+        <!-- ================= FORM ================= -->
+
+        <section class="form-section">
+
+            <div class="section-heading">
+
+                <div>
+                    <span class="eyebrow">CREATE COVER</span>
+
+                    <h2>Enter Your Information</h2>
+
+                    <p>
+                        Fill in the details below to generate your assignment cover.
+                    </p>
+                </div>
+
+            </div>
 
 
-                    <h1 id="showUniversity">Premier University</h1>
-<p id="showDepartment">Department of Computer Science & Engineering</p>
+            <!-- UNIVERSITY -->
+
+            <div class="form-group">
+
+                <label for="university">
+                    University
+                </label>
+
+                <input
+                    type="text"
+                    id="university"
+                    value="Premier University"
+                    readonly>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="department">
+                    Department
+                </label>
+
+                <input
+                    type="text"
+                    id="department"
+                    value="Department of Computer Science & Engineering"
+                    readonly>
+
+            </div>
+
+
+            <!-- ================= STUDENT INFORMATION ================= -->
+
+            <div class="form-card">
+
+                <div class="form-card-title">
+
+                    <span class="card-icon">01</span>
+
+                    <div>
+                        <h3>Student Information</h3>
+                        <p>Your academic information</p>
+                    </div>
+
+                </div>
+
+
+                <div class="form-grid">
+
+                    <div class="form-group">
+
+                        <label for="studentName">
+                            Student Name
+                            <span>*</span>
+                        </label>
+
+                        <input
+                            type="text"
+                            id="studentName"
+                            placeholder="Enter your full name"
+                            maxlength="60"
+                            autocomplete="name">
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="studentId">
+                            Student ID
+                            <span>*</span>
+                        </label>
+
+                        <input
+                            type="text"
+                            id="studentId"
+                            placeholder="Enter student ID"
+                            maxlength="30">
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="semester">
+                            Semester
+                        </label>
+
+                        <input
+                            type="text"
+                            id="semester"
+                            placeholder="e.g. 3rd Semester"
+                            maxlength="30">
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="section">
+                            Section
+                        </label>
+
+                        <input
+                            type="text"
+                            id="section"
+                            placeholder="e.g. A"
+                            maxlength="20">
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="program">
+                            Program
+                        </label>
+
+                        <input
+                            type="text"
+                            id="program"
+                            placeholder="e.g. B.Sc. in CSE"
+                            maxlength="50">
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="batch">
+                            Batch No
+                        </label>
+
+                        <input
+                            type="text"
+                            id="batch"
+                            placeholder="e.g. 45"
+                            maxlength="20">
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- ================= COURSE INFORMATION ================= -->
+
+            <div class="form-card">
+
+                <div class="form-card-title">
+
+                    <span class="card-icon">02</span>
+
+                    <div>
+                        <h3>Course Information</h3>
+                        <p>Information about your course</p>
+                    </div>
+
+                </div>
+
+
+                <div class="form-grid">
+
+                    <div class="form-group">
+
+                        <label for="courseName">
+                            Course Name
+                            <span>*</span>
+                        </label>
+
+                        <input
+                            type="text"
+                            id="courseName"
+                            placeholder="Enter course name"
+                            maxlength="80">
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="courseCode">
+                            Course Code
+                            <span>*</span>
+                        </label>
+
+                        <input
+                            type="text"
+                            id="courseCode"
+                            placeholder="e.g. CSE 221"
+                            maxlength="30">
+
+                    </div>
+
+
+                    <div class="form-group full-width">
+
+                        <label for="assignmentTitle">
+                            Assignment Title
+                            <span>*</span>
+                        </label>
+
+                        <input
+                            type="text"
+                            id="assignmentTitle"
+                            placeholder="Enter assignment title"
+                            maxlength="120">
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="submissionDate">
+                            Submission Date
+                            <span>*</span>
+                        </label>
+
+                        <input
+                            type="date"
+                            id="submissionDate">
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- ================= TEACHER INFORMATION ================= -->
+
+            <div class="form-card">
+
+                <div class="form-card-title">
+
+                    <span class="card-icon">03</span>
+
+                    <div>
+                        <h3>Teacher Information</h3>
+                        <p>Information about the course teacher</p>
+                    </div>
+
+                </div>
+
+
+                <div class="form-grid">
+
+                    <div class="form-group full-width">
+
+                        <label for="teacherName">
+                            Teacher Name
+                            <span>*</span>
+                        </label>
+
+                        <input
+                            type="text"
+                            id="teacherName"
+                            placeholder="Enter teacher's name"
+                            maxlength="80">
+
+                    </div>
+
+                </div>
+
+            </div>
+            <div class="form-progress">
+    <div class="progress-info">
+        <span>Form Completion</span>
+        <strong id="progressText">0%</strong>
+    </div>
+
+    <div class="progress-bar">
+        <div id="progressFill"></div>
+    </div>
+</div>
+
+
+            <!-- ================= ACTIONS ================= -->
+
+            <div class="form-actions">
+
+                <button
+                    type="button"
+                    onclick="generateCover()"
+                    class="generate-btn">
+
+                    <span>Generate Cover</span>
+                    <span class="arrow">→</span>
+
+                </button>
+
+
+                <button
+                    type="button"
+                    onclick="clearData()"
+                    class="clear">
+
+                    Clear All
+
+                </button>
+
+            </div>
+
+
+            <div class="save-status">
+
+                <span class="status-dot"></span>
+
+                Your information is saved automatically in this browser.
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= PREVIEW ================= -->
+
+        <section class="preview-section">
+
+            <div class="preview-header">
+
+                <div>
+
+                    <span class="eyebrow">LIVE PREVIEW</span>
+
+                    <h2>Assignment Cover</h2>
+
+                </div>
+
+                <span class="a4-badge">
+                    A4 FORMAT
+                </span>
+
+            </div>
+
+
+            <!-- ================= COVER ================= -->
+
+            <div id="cover">
+
+                <div class="cover-inner">
+
+                    <!-- LOGO -->
+
+                    <img
+                        src="puc_logo.png"
+                        alt="Premier University Logo"
+                        class="cover-logo">
+
+
+                    <!-- UNIVERSITY -->
+
+                    <h1 id="showUniversity">
+                        Premier University
+                    </h1>
+
+                    <p id="showDepartment">
+                        Department of Computer Science & Engineering
+                    </p>
+
+
+                    <!-- ASSIGNMENT -->
 
                     <div class="cover-title">
-                        <h2>ASSIGNMENT</h2>
+
+                        <span class="cover-label">
+                            ACADEMIC SUBMISSION
+                        </span>
+
+                        <h2>
+                            ASSIGNMENT
+                        </h2>
+
                         <h3 id="showAssignment">
                             Assignment Title
                         </h3>
+
                     </div>
+
+
+                    <!-- COURSE DETAILS -->
 
                     <div class="details">
 
-                        <p>
-                            <strong>Student Name:</strong>
-                            <span id="showStudentName">---</span>
-                        </p>
+                        <div class="course-details">
 
-                        <p>
-                            <strong>Student ID:</strong>
-                            <span id="showStudentId">---</span>
-                        </p>
+                            <p>
 
-                        <p>
-                            <strong>Course Name:</strong>
-                            <span id="showCourseName">---</span>
-                        </p>
+                                <strong>
+                                    Course Title
+                                </strong>
 
-                        <p>
-                            <strong>Course Code:</strong>
-                            <span id="showCourseCode">---</span>
-                        </p>
+                                <span>:</span>
 
-                        <p>
-                            <strong>Teacher Name:</strong>
-                            <span id="showTeacherName">---</span>
-                        </p>
+                                <span id="showCourseName">
+                                    ---
+                                </span>
 
-                        <p>
-                            <strong>Submission Date:</strong>
-                            <span id="showDate">---</span>
-                        </p>
+                            </p>
+
+
+                            <p>
+
+                                <strong>
+                                    Course Code
+                                </strong>
+
+                                <span>:</span>
+
+                                <span id="showCourseCode">
+                                    ---
+                                </span>
+
+                            </p>
+
+
+                            <p>
+
+                                <strong>
+                                    Date of Submission
+                                </strong>
+
+                                <span>:</span>
+
+                                <span id="showDate">
+                                    ---
+                                </span>
+
+                            </p>
+
+                        </div>
+
+
+                        <!-- ================= SUBMISSION ================= -->
+
+                        <div class="submission-box">
+
+
+                            <!-- SUBMITTED BY -->
+
+                            <div class="submitted-by">
+
+                                <h3>
+                                    Submitted By
+                                </h3>
+
+
+                                <p>
+
+                                    <strong>Name</strong>
+
+                                    <span>:</span>
+
+                                    <span id="showStudentName">
+                                        ---
+                                    </span>
+
+                                </p>
+
+
+                                <p>
+
+                                    <strong>ID No</strong>
+
+                                    <span>:</span>
+
+                                    <span id="showStudentId">
+                                        ---
+                                    </span>
+
+                                </p>
+
+
+                                <p>
+
+                                    <strong>Semester</strong>
+
+                                    <span>:</span>
+
+                                    <span id="showSemester">
+                                        ---
+                                    </span>
+
+                                </p>
+
+
+                                <p>
+
+                                    <strong>Section</strong>
+
+                                    <span>:</span>
+
+                                    <span id="showSection">
+                                        ---
+                                    </span>
+
+                                </p>
+
+
+                                <p>
+
+                                    <strong>Program</strong>
+
+                                    <span>:</span>
+
+                                    <span id="showProgram">
+                                        ---
+                                    </span>
+
+                                </p>
+
+
+                                <p>
+
+                                    <strong>Batch No</strong>
+
+                                    <span>:</span>
+
+                                    <span id="showBatch">
+                                        ---
+                                    </span>
+
+                                </p>
+
+                            </div>
+
+
+                            <!-- SUBMITTED TO -->
+
+                            <div class="submitted-to">
+
+                                <h3>
+                                    Submitted To
+                                </h3>
+
+
+                                <p
+                                    id="showTeacherName"
+                                    class="teacher-name">
+
+                                    Teacher Name
+
+                                </p>
+
+
+                                <p>
+                                    Lecturer
+                                </p>
+
+
+                                <p>
+                                    Department of Computer Science & Engineering
+                                </p>
+
+
+                                <p>
+                                    Premier University, Chittagong
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- FOOTER -->
+
+                    <div class="cover-footer">
+
+                        <span>
+                            Premier University
+                        </span>
+
+                        <span>
+                            Department of CSE
+                        </span>
 
                     </div>
 
                 </div>
 
-                <button onclick="window.print()" class="print-btn">
-                    🖨 Print / Save PDF
-                </button>
+            </div>
 
-            </section>
 
-        </main>
+            <!-- PRINT BUTTON -->
 
-    </div>
+            <button
+                type="button"
+                onclick="window.print()"
+                class="print-btn">
+
+                🖨
+                <span>Print / Save as PDF</span>
+
+            </button>
+
+        </section>
+
+    </main>
+
+
+    <!-- ================= FOOTER ================= -->
+
+    <footer class="site-footer">
+
+        <p>
+            Assignment Cover Generator
+            <span>•</span>
+            Premier University
+        </p>
+
+        <p class="footer-small">
+            Designed for academic use
+        </p>
+
+    </footer>
+
+
+    <!-- JAVASCRIPT -->
 
     <script src="script.js"></script>
+<div id="toast" class="toast"></div>
 
 </body>
+
 </html>

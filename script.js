@@ -1,12 +1,9 @@
-// Get value from input
-function getValue(id) {
-    return document.getElementById(id).value;
-}
+// ========================================
+// ASSIGNMENT COVER GENERATOR
+// ========================================
 
 
-// Generate Cover
-function generateCover() {
-    // Check required fields
+// Required fields
 const requiredFields = [
     "studentName",
     "studentId",
@@ -17,172 +14,457 @@ const requiredFields = [
     "submissionDate"
 ];
 
-for (const fieldId of requiredFields) {
-    const field = document.getElementById(fieldId);
 
-    if (field.value.trim() === "") {
-        alert("Please fill in all required fields.");
-        field.focus();
-        return;
+// Preview mapping
+const previewMap = {
+    university: "showUniversity",
+    department: "showDepartment",
+    assignmentTitle: "showAssignment",
+
+    studentName: "showStudentName",
+    studentId: "showStudentId",
+    semester: "showSemester",
+    section: "showSection",
+    program: "showProgram",
+    batch: "showBatch",
+
+    courseName: "showCourseName",
+    courseCode: "showCourseCode",
+
+    teacherName: "showTeacherName",
+    submissionDate: "showDate"
+};
+
+
+// Get input value
+function getValue(id) {
+    const element = document.getElementById(id);
+
+    if (!element) {
+        return "";
+    }
+
+    return element.value.trim();
+}
+
+
+// Format date
+function formatDate(dateValue) {
+
+    if (!dateValue) {
+        return "---";
+    }
+
+    const date = new Date(dateValue + "T00:00:00");
+
+    if (isNaN(date)) {
+        return dateValue;
+    }
+
+    return date.toLocaleDateString("en-GB", {
+        day: "2-digit",
+        month: "long",
+        year: "numeric"
+    });
+}
+
+
+// ========================================
+// UPDATE LIVE PREVIEW
+// ========================================
+
+function updatePreview() {
+
+    Object.keys(previewMap).forEach(function (inputId) {
+
+        const previewId = previewMap[inputId];
+
+        const input = document.getElementById(inputId);
+        const preview = document.getElementById(previewId);
+
+        if (!input || !preview) {
+            return;
+        }
+
+        let value = input.value.trim();
+
+        // Format submission date
+        if (inputId === "submissionDate") {
+            value = formatDate(value);
+        }
+
+        if (inputId === "university") {
+            preview.textContent = value || "Premier University";
+        }
+
+        else if (inputId === "department") {
+            preview.textContent =
+                value ||
+                "Department of Computer Science & Engineering";
+        }
+
+        else {
+            preview.textContent = value || "---";
+        }
+
+    });
+}
+
+
+// ========================================
+// UPDATE FORM PROGRESS
+// ========================================
+
+function updateProgress() {
+
+    let completed = 0;
+
+    requiredFields.forEach(function (fieldId) {
+
+        const field = document.getElementById(fieldId);
+
+        if (field && field.value.trim() !== "") {
+            completed++;
+        }
+
+    });
+
+    const total = requiredFields.length;
+
+    const percentage = Math.round(
+        (completed / total) * 100
+    );
+
+    const progressText =
+        document.getElementById("progressText");
+
+    const progressFill =
+        document.getElementById("progressFill");
+
+    if (progressText) {
+        progressText.textContent = percentage + "%";
+    }
+
+    if (progressFill) {
+        progressFill.style.width = percentage + "%";
     }
 }
 
+
+// ========================================
+// SAVE DATA
+// ========================================
+
+function saveData() {
+
     const data = {
+
         university: getValue("university"),
+
         department: getValue("department"),
+
         studentName: getValue("studentName"),
         studentId: getValue("studentId"),
+        semester: getValue("semester"),
+        section: getValue("section"),
+        program: getValue("program"),
+        batch: getValue("batch"),
+
         courseName: getValue("courseName"),
         courseCode: getValue("courseCode"),
+
         assignmentTitle: getValue("assignmentTitle"),
+
         teacherName: getValue("teacherName"),
+
         submissionDate: getValue("submissionDate")
     };
 
-    // Show data on cover
-    document.getElementById("showUniversity").textContent =
-        data.university || "University Name";
 
-    document.getElementById("showDepartment").textContent =
-        data.department || "Department Name";
+    localStorage.setItem(
+        "assignmentCoverData",
+        JSON.stringify(data)
+    );
 
-    document.getElementById("showAssignment").textContent =
-        data.assignmentTitle || "Assignment Title";
-
-    document.getElementById("showStudentName").textContent =
-        data.studentName || "---";
-
-    document.getElementById("showStudentId").textContent =
-        data.studentId || "---";
-
-    document.getElementById("showCourseName").textContent =
-        data.courseName || "---";
-
-    document.getElementById("showCourseCode").textContent =
-        data.courseCode || "---";
-
-    document.getElementById("showTeacherName").textContent =
-        data.teacherName || "---";
-
-    document.getElementById("showDate").textContent =
-        data.submissionDate || "---";
-
-
-    // Save data in LocalStorage
-    localStorage.setItem("assignmentCoverData", JSON.stringify(data));
-
-    alert("Assignment cover generated and saved!");
+    return data;
 }
 
 
-// Load saved data
+// ========================================
+// GENERATE COVER
+// ========================================
+
+function generateCover() {
+
+    let valid = true;
+
+    // Remove previous errors
+    document.querySelectorAll("input").forEach(function (input) {
+        input.classList.remove("input-error");
+    });
+
+
+    // Validate required fields
+    for (const fieldId of requiredFields) {
+
+        const field =
+            document.getElementById(fieldId);
+
+        if (!field || field.value.trim() === "") {
+
+            valid = false;
+
+            if (field) {
+                field.classList.add("input-error");
+                field.focus();
+            }
+
+            break;
+        }
+    }
+
+
+    if (!valid) {
+
+    alert(
+        "Please fill in all required fields marked as required."
+    );
+
+    return;
+}
+
+
+    // Save data
+    saveData();
+
+
+    // Update preview
+    updatePreview();
+
+
+    // Update progress
+    updateProgress();
+
+
+    // Success message
+   showToast(
+    "Assignment cover generated and saved successfully!"
+);
+}
+
+
+// ========================================
+// LOAD SAVED DATA
+// ========================================
+
 function loadSavedData() {
 
-    const savedData = localStorage.getItem("assignmentCoverData");
+    const savedData =
+        localStorage.getItem("assignmentCoverData");
+
 
     if (!savedData) {
+
+        // Default values
+        const university =
+            document.getElementById("university");
+
+        const department =
+            document.getElementById("department");
+
+        if (university) {
+            university.value =
+                "Premier University";
+        }
+
+        if (department) {
+            department.value =
+                "Department of Computer Science & Engineering";
+        }
+
+        updatePreview();
+        updateProgress();
+
         return;
     }
 
-    const data = JSON.parse(savedData);
 
-    document.getElementById("university").value =
-        data.university || "";
+    try {
 
-    document.getElementById("department").value =
-        data.department || "";
+        const data =
+            JSON.parse(savedData);
 
-    document.getElementById("studentName").value =
-        data.studentName || "";
 
-    document.getElementById("studentId").value =
-        data.studentId || "";
+        Object.keys(data).forEach(function (key) {
 
-    document.getElementById("courseName").value =
-        data.courseName || "";
+            const input =
+                document.getElementById(key);
 
-    document.getElementById("courseCode").value =
-        data.courseCode || "";
+            if (input) {
+                input.value = data[key] || "";
+            }
 
-    document.getElementById("assignmentTitle").value =
-        data.assignmentTitle || "";
+        });
 
-    document.getElementById("teacherName").value =
-        data.teacherName || "";
 
-    document.getElementById("submissionDate").value =
-        data.submissionDate || "";
+        // Make sure fixed fields remain correct
+        document.getElementById("university").value =
+            data.university ||
+            "Premier University";
 
-    // Show saved data on cover
-    document.getElementById("showUniversity").textContent =
-        data.university || "University Name";
+        document.getElementById("department").value =
+            data.department ||
+            "Department of Computer Science & Engineering";
 
-    document.getElementById("showDepartment").textContent =
-        data.department || "Department Name";
 
-    document.getElementById("showAssignment").textContent =
-        data.assignmentTitle || "Assignment Title";
+        updatePreview();
 
-    document.getElementById("showStudentName").textContent =
-        data.studentName || "---";
+        updateProgress();
 
-    document.getElementById("showStudentId").textContent =
-        data.studentId || "---";
+    }
 
-    document.getElementById("showCourseName").textContent =
-        data.courseName || "---";
+    catch (error) {
 
-    document.getElementById("showCourseCode").textContent =
-        data.courseCode || "---";
+        console.log(
+            "Saved data could not be loaded."
+        );
 
-    document.getElementById("showTeacherName").textContent =
-        data.teacherName || "---";
-
-    document.getElementById("showDate").textContent =
-        data.submissionDate || "---";
+    }
 }
 
 
-// Clear saved data
+// ========================================
+// CLEAR DATA
+// ========================================
+
 function clearData() {
 
-    localStorage.removeItem("assignmentCoverData");
+    const confirmClear =
+        confirm(
+            "Are you sure you want to clear all information?"
+        );
 
-    document.querySelectorAll("input").forEach(input => {
-        input.value = "";
-    });
-    document.getElementById("university").value = "Premier University";
 
-document.getElementById("department").value =
-    "Department of Computer Science & Engineering";
+    if (!confirmClear) {
+        return;
+    }
 
-   document.getElementById("showUniversity").textContent =
-    "Premier University";
 
-document.getElementById("showDepartment").textContent =
-    "Department of Computer Science & Engineering";
-    document.getElementById("showAssignment").textContent =
-        "Assignment Title";
+    // Remove LocalStorage
+    localStorage.removeItem(
+        "assignmentCoverData"
+    );
 
-    document.getElementById("showStudentName").textContent =
-        "---";
 
-    document.getElementById("showStudentId").textContent =
-        "---";
+    // Clear inputs
+    document.querySelectorAll("input").forEach(
+        function (input) {
 
-    document.getElementById("showCourseName").textContent =
-        "---";
+            input.value = "";
 
-    document.getElementById("showCourseCode").textContent =
-        "---";
+            input.classList.remove(
+                "input-error"
+            );
 
-    document.getElementById("showTeacherName").textContent =
-        "---";
+        }
+    );
 
-    document.getElementById("showDate").textContent =
-        "---";
+
+    // Restore fixed information
+    document.getElementById("university").value =
+        "Premier University";
+
+    document.getElementById("department").value =
+        "Department of Computer Science & Engineering";
+
+
+    // Reset preview
+    updatePreview();
+
+
+    // Reset progress
+    updateProgress();
+
+
+    showToast(
+    "All information has been cleared."
+);
 }
 
 
-// Load saved information when page opens
-window.addEventListener("DOMContentLoaded", loadSavedData);
+// ========================================
+// AUTO SAVE + LIVE PREVIEW
+// ========================================
+
+function setupAutoSave() {
+
+    document.querySelectorAll("input").forEach(
+        function (input) {
+
+            input.addEventListener(
+                "input",
+                function () {
+
+                    // Remove error when user types
+                    input.classList.remove(
+                        "input-error"
+                    );
+
+
+                    // Save current data
+                    saveData();
+
+
+                    // Update preview
+                    updatePreview();
+
+
+                    // Update progress
+                    updateProgress();
+
+                }
+            );
+
+        }
+    );
+}
+
+
+// ========================================
+// PAGE LOAD
+// ========================================
+
+window.addEventListener(
+    "DOMContentLoaded",
+    function () {
+
+        loadSavedData();
+
+        setupAutoSave();
+
+        updatePreview();
+
+        updateProgress();
+
+    }
+);
+// ========================================
+// TOAST NOTIFICATION
+// ========================================
+
+function showToast(message) {
+
+    const toast = document.getElementById("toast");
+
+    if (!toast) {
+        return;
+    }
+
+    toast.textContent = message;
+
+    toast.classList.add("show");
+
+    setTimeout(function () {
+        toast.classList.remove("show");
+    }, 2500);
+}
